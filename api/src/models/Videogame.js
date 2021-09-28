@@ -20,10 +20,10 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       release: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
       },
       rating: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.FLOAT,
       },
       platforms: {
         type: DataTypes.STRING,
