@@ -1,7 +1,8 @@
 require("dotenv").config();
 const { Router } = require("express");
 const axios = require("axios");
-const { Videogame } = require("../db.js");
+const { Op } = require("sequelize");
+const { Videogame, Genres } = require("../db.js");
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -11,48 +12,52 @@ const apiKey = process.env.API_KEY;
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 router.get("/videogames", async (req, res) => {
-  let { page, limit } = req.query;
+  let { page, limit, name } = req.query;
 
   try {
-    let response = await getVideogames(page, limit);
+    if (name) {
+      let videogames = await getVideogameByName(name);
 
-    if (!response)
+      if (!videogames)
+        return res
+          .status(404)
+          .json({ response: "FAILED", message: "Videogames not found" });
+      return res.status(200).json(videogames);
+    }
+
+    let videogames = await getVideogames(page, limit);
+
+    if (!videogames)
       return res.status(401).json({
         response: "FAILED",
         message: "There are no Videogames",
       });
 
-    let videogames = response.map((game) => {
-      return {
-        id: game.id,
-        name: game.name,
-        image: game.background_image,
-        rating: game.rating,
-        platforms: game.platforms,
-        genres: game.genres,
-      };
-    });
-
-    res.status(200).json({ videogames });
+    res.status(200).json(videogames);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-router.get("/videogames/:idVideogame", async (req, res) => {
+router.get("/videogame/:idVideogame", async (req, res) => {
   let { idVideogame } = req.params;
 
   try {
     let videogame = await getVideogameById(idVideogame);
 
-    res.status(200).json({ videogame });
+    if (!videogame)
+      return res
+        .status(404)
+        .json({ response: "FAILED", messgae: "Videogame not found" });
+
+    res.status(200).json(videogame);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
 router.post("/videogame", async (req, res) => {
-  let { name, description, release, rating, platforms } = req.body;
+  let { name, description, release, rating, platforms, genres } = req.body;
 
   try {
     let videogame = await Videogame.create({
@@ -62,6 +67,8 @@ router.post("/videogame", async (req, res) => {
       rating,
       platforms,
     });
+
+    await videogame.addGenres(genres);
 
     if (!videogame)
       return res
@@ -79,30 +86,53 @@ const getVideogames = async (page, limit) => {
     `https://api.rawg.io/api/games?&key=${apiKey}`
   );
 
-  let data = response.data.results;
+  let results = response.data.results;
 
   let startIndex = (page - 1) * limit;
   let endIndex = page * limit;
 
-  let results = data.slice(startIndex, endIndex);
+  let videogames = results.slice(startIndex, endIndex);
 
-  return results;
+  return videogames;
 };
 
 const getVideogameById = async (id) => {
-  let response = await axios.get(
-    `https://api.rawg.io/api/games/${id}?key=${apiKey}`
-  );
+  if (Number(id)) {
+    let response = await axios.get(
+      `https://api.rawg.io/api/games/${id}?key=${apiKey}`
+    );
 
-  return {
-    id: response.data.id,
-    name: response.data.name,
-    description: response.data.description,
-    background_image: response.data.background_image,
-    rating: response.data.rating,
-    genres: response.data.genres,
-    platforms: response.data.metacritic_platforms,
-  };
+    return response.data;
+  } else {
+    let response = await Videogame.findOne({
+      where: {
+        id,
+      },
+      include: [
+        {
+          model: Genres,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+
+    return response;
+  }
+};
+
+const getVideogameByName = async (name) => {
+  let videogamesDB = await Videogame.findAll({
+    where: {
+      name: {
+        [Op.iLike]: `%${name}%`,
+      },
+    },
+  });
+
+  return videogamesDB;
 };
 
 module.exports = router;
