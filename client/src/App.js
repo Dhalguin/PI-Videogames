@@ -1,10 +1,19 @@
-import "./App.css";
+import React from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+
+import HomeGamesPage from "./pages/HomeGamesPage.jsx";
+import DetailsGamesPage from "./pages/DetailsGamesPage.jsx";
+import AddGamesPage from "./pages/AddGamesPage.jsx";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Henry Videogames</h1>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={HomeGamesPage} />
+        <Route exact path="/details" component={DetailsGamesPage} />
+        <Route exact path="/create" component={AddGamesPage} />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
