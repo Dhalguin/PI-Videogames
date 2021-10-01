@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../../assets/styles/details_card.module.css";
 
 function DetailsGame(props) {
   const { id, name, background_image, description } = props;
@@ -19,21 +20,29 @@ function DetailsGame(props) {
   }
 
   return (
-    <div>
-      <div>
-        <img
-          src={background_image}
-          alt={`${name}-${id}`}
-          style={{ width: "300px" }}
-        />
-      </div>
-      <div>
-        <h3>{name}</h3>
-        <p>{released}</p>
-        <p>{rating}</p>
-        <p>{description}</p>
-        <p>{genres.join(", ")}</p>
-        <p>{platforms.join(", ")}</p>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <p className={styles.title}>{name}</p>
+        <div className="d-flex">
+          <div>
+            <img
+              src={background_image}
+              alt={`${name}-${id}`}
+              style={{ height: "300px", width: "300px" }}
+            />
+            <p>
+              <b>Released:</b> {released}
+            </p>
+            <p>
+              <b>Rating:</b> {rating}
+            </p>
+          </div>
+          <div className={styles.body}>
+            {description}
+            {/* <p>{genres.join(", ")}</p>
+            <p>{platforms.join(", ")}</p> */}
+          </div>
+        </div>
       </div>
     </div>
   );
