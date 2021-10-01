@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getVideogames } from "../../redux/actions/gamesAction.js";
+import styles from "../../assets/styles/search_bar.module.css";
 
 function SearchBar() {
   const dispatch = useDispatch();
@@ -17,10 +18,14 @@ function SearchBar() {
         type="text"
         name="search"
         id="search"
+        className={styles.input}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        placeholder="Enter the name of the movie or serie"
       />
-      <button onClick={handleSubmit}>Search</button>
+      <button onClick={handleSubmit} className={styles.button}>
+        SEARCH
+      </button>
     </div>
   );
 }

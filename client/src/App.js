@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-
+import "./assets/styles/app.css";
 import HomeGamesPage from "./pages/HomeGamesPage.jsx";
 import DetailsGamesPage from "./pages/DetailsGamesPage.jsx";
 import AddGamesPage from "./pages/AddGamesPage.jsx";

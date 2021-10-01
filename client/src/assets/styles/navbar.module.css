@@ -1,0 +1,20 @@
+.container {
+  height: 50px;
+  margin-bottom: 1em;
+  padding: 0px 12px;
+  background-color: #2b2b2b;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.62);
+  align-items: center;
+  /* justify-content: space-between; */
+  display: flex;
+}
+
+.title {
+  margin-left: 0.5em;
+  color: #fff;
+}
+
+.search {
+  text-align: right;
+  flex-grow: 1;
+}
