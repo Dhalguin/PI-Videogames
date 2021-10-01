@@ -82,11 +82,13 @@ router.post("/videogame", async (req, res) => {
 });
 
 const getVideogames = async (page, limit) => {
+  let responseDB = await Videogame.findAll();
+
   let response = await axios.get(
     `https://api.rawg.io/api/games?&key=${apiKey}`
   );
 
-  let results = response.data.results;
+  let results = [].concat(responseDB).concat(response.data.results);
 
   let startIndex = (page - 1) * limit;
   let endIndex = page * limit;
@@ -138,7 +140,7 @@ const getVideogameByName = async (name) => {
 
   let videogames = [].concat(responseDB).concat(response.data.results);
 
-  let results = videogames.splice(0, 15);
+  let results = videogames.slice(0, 15);
 
   return results;
 };
