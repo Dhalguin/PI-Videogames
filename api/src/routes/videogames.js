@@ -124,7 +124,11 @@ const getVideogameById = async (id) => {
 };
 
 const getVideogameByName = async (name) => {
-  let videogamesDB = await Videogame.findAll({
+  let response = await axios.get(
+    `https://api.rawg.io/api/games?&key=${apiKey}&search=${name}`
+  );
+
+  let responseDB = await Videogame.findAll({
     where: {
       name: {
         [Op.iLike]: `%${name}%`,
@@ -132,7 +136,11 @@ const getVideogameByName = async (name) => {
     },
   });
 
-  return videogamesDB;
+  let videogames = [].concat(responseDB).concat(response.data.results);
+
+  let results = videogames.splice(0, 15);
+
+  return results;
 };
 
 module.exports = router;
