@@ -1,6 +1,7 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function Card({ name, img, genres }) {
+function Card({ id, name, img, genres }) {
   let genresName = [];
 
   genres.forEach((genre) => {
@@ -10,7 +11,9 @@ function Card({ name, img, genres }) {
   return (
     <div>
       <img src={img} alt={name} style={{ width: "300px" }} />
-      <p>{name}</p>
+      <p>
+        <Link to={`videogames/${id}`}>{name}</Link>
+      </p>
       <span>{genresName.join(",")}</span>
     </div>
   );

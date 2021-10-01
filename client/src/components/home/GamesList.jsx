@@ -18,6 +18,7 @@ function GamesList() {
           {videogames.map((videogame) => (
             <Card
               key={videogame.id}
+              id={videogame.id}
               name={videogame.name}
               img={videogame.background_image}
               genres={videogame.genres}

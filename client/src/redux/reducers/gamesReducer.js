@@ -1,7 +1,8 @@
-import { GET_VIDEOGAMES } from "../actions/gamesAction.js";
+import { GET_VIDEOGAMES, GET_DETAILS } from "../actions/gamesAction.js";
 
 const initialState = {
   videogames: [],
+  details: {},
 };
 
 export default function gamesReducer(state = initialState, action) {
@@ -11,7 +12,11 @@ export default function gamesReducer(state = initialState, action) {
         ...state,
         videogames: action.payload,
       };
-
+    case GET_DETAILS:
+      return {
+        ...state,
+        details: action.payload,
+      };
     default:
       return state;
   }
