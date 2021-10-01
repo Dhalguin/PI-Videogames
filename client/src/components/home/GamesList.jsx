@@ -6,7 +6,7 @@ import Card from "../card/Card.jsx";
 function GamesList() {
   const dispatch = useDispatch();
   const videogames = useSelector((state) => state.videogames);
-  console.log(videogames);
+
   useEffect(() => {
     dispatch(getVideogames(1, 20));
   }, []);

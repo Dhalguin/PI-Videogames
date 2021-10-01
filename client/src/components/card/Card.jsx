@@ -4,9 +4,10 @@ import { Link } from "react-router-dom";
 function Card({ id, name, img, genres }) {
   let genresName = [];
 
-  genres.forEach((genre) => {
-    genresName.push(genre.name);
-  });
+  genres &&
+    genres.forEach((genre) => {
+      genresName.push(genre.name);
+    });
 
   return (
     <div>

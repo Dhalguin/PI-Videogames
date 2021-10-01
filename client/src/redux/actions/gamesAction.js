@@ -3,7 +3,6 @@ export const GET_DETAILS = "GET_DETAILS";
 
 // thunk
 export function getVideogames(page, limit, name = "") {
-  console.log(page, limit, name);
   return function (dispatch) {
     fetch(
       `http://localhost:3001/videogames?page=${page}&limit=${limit}&name=${name}`
