@@ -1,9 +1,12 @@
 import React from "react";
+import GamesList from "../components/home/GamesList";
+import NavBar from "../components/navbar/NavBar";
 
 function HomeGamesPage() {
   return (
     <>
-      <h2>Principal Page</h2>
+      <NavBar />
+      <GamesList />
     </>
   );
 }

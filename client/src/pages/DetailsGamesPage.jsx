@@ -1,9 +1,10 @@
 import React from "react";
+import DetailsGame from "../components/details/DetailsGame";
 
 function DetailsGamesPage() {
   return (
     <>
-      <h2>Game Details Page</h2>
+      <DetailsGame />
     </>
   );
 }
