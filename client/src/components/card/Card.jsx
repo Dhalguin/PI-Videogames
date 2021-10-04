@@ -15,7 +15,7 @@ function Card({ id, name, img, genres }) {
       <img src={img} alt={name} />
       <div className={styles.body}>
         <p>
-          <Link to={`videogames/${id}`} className={styles.title}>
+          <Link to={`videogames/${id}`} className="link">
             {name}
           </Link>
         </p>

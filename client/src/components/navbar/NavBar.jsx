@@ -7,7 +7,7 @@ import styles from "../../assets/styles/navbar.module.css";
 function NavBar() {
   return (
     <div className={styles.container}>
-      <Link to="/videogames">
+      <Link to="/videogames" className="link">
         <div className="center">
           <img src={logo} alt="soy_henry" />
           <span className={styles.title}>SOY HENRY</span>
