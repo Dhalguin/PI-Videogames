@@ -1,8 +1,6 @@
 .container {
   padding: 1em;
   height: 100vh;
-  background: #000000;
-  background: linear-gradient(to left, #212121, #000000);
 
   color: #fff;
   flex-direction: column;

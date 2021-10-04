@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import styles from "../../assets/styles/card.module.css";
 
 function Card({ id, name, img, genres }) {
   let genresName = [];
@@ -10,12 +11,16 @@ function Card({ id, name, img, genres }) {
     });
 
   return (
-    <div>
-      <img src={img} alt={name} style={{ width: "300px" }} />
-      <p>
-        <Link to={`videogames/${id}`}>{name}</Link>
-      </p>
-      <span>{genresName.join(",")}</span>
+    <div className={styles.box}>
+      <img src={img} alt={name} />
+      <div className={styles.body}>
+        <p>
+          <Link to={`videogames/${id}`} className={styles.title}>
+            {name}
+          </Link>
+        </p>
+        <span>{genresName.join(", ")}</span>
+      </div>
     </div>
   );
 }

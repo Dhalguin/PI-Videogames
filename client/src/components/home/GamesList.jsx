@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getVideogames } from "../../redux/actions/gamesAction.js";
 import Card from "../card/Card.jsx";
+import styles from "../../assets/styles/list.module.css";
 
 function GamesList() {
   const dispatch = useDispatch();
@@ -12,9 +13,9 @@ function GamesList() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       {videogames.length > 0 ? (
-        <div>
+        <div className={styles.list}>
           {videogames.map((videogame) => (
             <Card
               key={videogame.id}
