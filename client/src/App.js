@@ -10,15 +10,15 @@ import LandingPage from "./pages/LandingPage";
 function App() {
   return (
     <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Route path="/videogames">
-          <NavBar />
+      <Route exact path="/" component={LandingPage} />
+      <Route path="/videogames">
+        <NavBar />
+        <Switch>
           <Route exact path="/videogames" component={HomeGamesPage} />
-          <Route path="/videogames/:id" component={DetailsGamesPage} />
           <Route path="/videogames/create" component={AddGamesPage} />
-        </Route>
-      </Switch>
+          <Route path="/videogames/:id" component={DetailsGamesPage} />
+        </Switch>
+      </Route>
     </BrowserRouter>
   );
 }

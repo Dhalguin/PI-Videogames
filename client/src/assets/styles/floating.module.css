@@ -1,0 +1,17 @@
+.box {
+  width: 70px;
+  height: 70px;
+  background-color: #e8ee1b;
+  border: 2px solid #61615e;
+  border-radius: 10em;
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  cursor: pointer;
+}
+
+.box span {
+  color: #61615e;
+  font-size: 35px;
+  font-weight: bold;
+}
