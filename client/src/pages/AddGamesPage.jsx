@@ -1,8 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import AddGameForm from "../components/add/AddGameForm";
 import styles from "../assets/styles/add_box.module.css";
 
 function AddGamesPage() {
+  const state = useSelector((state) => state.genres);
+  const [genres, setGenres] = React.useState([]);
   const [videogame, setVideogame] = React.useState({
     title: "",
     description: "",
@@ -10,6 +13,8 @@ function AddGamesPage() {
     rating: "",
     platforms: "",
   });
+
+  console.log(genres);
 
   const addVideogame = (data) => {
     let videogame = {
@@ -38,7 +43,8 @@ function AddGamesPage() {
       videogame.released &&
       videogame.rating &&
       videogame.title &&
-      videogame.platforms
+      videogame.platforms &&
+      genres.length > 0
     ) {
       addVideogame(videogame);
     } else {
@@ -52,6 +58,7 @@ function AddGamesPage() {
       [e.target.name]: e.target.value,
     });
   };
+  console.log(genres);
 
   return (
     <div className={`${styles.container} center`}>
@@ -59,6 +66,8 @@ function AddGamesPage() {
       <AddGameForm
         styles={styles}
         videogame={videogame}
+        state={state}
+        setGenres={setGenres}
         handleOnChange={handleOnChange}
         handleOnSubmit={handleOnSubmit}
       />

@@ -1,6 +1,23 @@
 import React from "react";
 
-function AddGameForm({ styles, videogame, handleOnChange, handleOnSubmit }) {
+function AddGameForm({
+  styles,
+  videogame,
+  handleOnChange,
+  handleOnSubmit,
+  state,
+  setGenres,
+}) {
+  const handleGenres = (e) => {
+    if (document.getElementById(e.target.value).checked) {
+      setGenres((state) => [...state, ...parseInt(e.target.value)]);
+    } else {
+      setGenres((state) =>
+        state.filter((element) => element !== e.target.value)
+      );
+    }
+  };
+
   return (
     <div className={`${styles.box} center`}>
       <form>
@@ -52,6 +69,19 @@ function AddGameForm({ styles, videogame, handleOnChange, handleOnSubmit }) {
             value={videogame.platforms}
             onChange={handleOnChange}
           />
+        </div>
+        <div>
+          {state.genres.map((genre) => (
+            <React.Fragment key={genre.id}>
+              <input
+                type="checkbox"
+                id={genre.id}
+                value={genre.id}
+                onChange={handleGenres}
+              />
+              <label htmlFor={genre.id}>{genre.name}</label>
+            </React.Fragment>
+          ))}
         </div>
         <div className="form-group text-center">
           <button onClick={handleOnSubmit}>APPEND</button>
