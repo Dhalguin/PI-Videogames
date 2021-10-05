@@ -8,12 +8,42 @@ function AddGamesPage() {
     description: "",
     released: "",
     rating: "",
-    platforms: [],
+    platforms: "",
   });
+
+  const addVideogame = (data) => {
+    let videogame = {
+      name: data.title,
+      description: data.description,
+      release: data.released,
+      rating: data.rating,
+      platforms: data.platforms,
+    };
+
+    fetch(`http://localhost:3001/videogame`, {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(videogame),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(videogame);
+    if (
+      videogame.title &&
+      videogame.description &&
+      videogame.released &&
+      videogame.rating &&
+      videogame.title &&
+      videogame.platforms
+    ) {
+      addVideogame(videogame);
+    } else {
+      alert("Write in all textfiled");
+    }
   };
 
   const handleOnChange = (e) => {
