@@ -1,5 +1,6 @@
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_DETAILS = "GET_DETAILS";
+export const GET_GENRES = "GET_GENRES";
 
 // thunk
 export function getVideogames(page, limit, name = "") {
@@ -20,6 +21,16 @@ export function getVideogameDetails(id) {
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: GET_DETAILS, payload: data });
+      });
+  };
+}
+
+export function getGenres() {
+  return function (dispatch) {
+    fetch("http://localhost:3001/genres")
+      .then((res) => res.json())
+      .then((data) => {
+        dispatch({ type: GET_GENRES, payload: data });
       });
   };
 }
