@@ -11,7 +11,7 @@
 .box {
   padding: 1em;
   width: 50vw;
-  height: 60vh;
+  height: 65vh;
   color: #434343;
   background-color: #fff;
   border-radius: 1em;
@@ -38,9 +38,8 @@
 }
 
 .box textarea {
-  max-width: 100%;
-  min-height: 60px;
-  max-height: 150px;
+  height: 100px;
+  resize: none;
 }
 
 .box button {
