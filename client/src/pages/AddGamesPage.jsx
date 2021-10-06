@@ -19,7 +19,7 @@ function AddGamesPage() {
     let videogame = {
       name: data.title,
       description: data.description,
-      release: data.released,
+      released: data.released,
       rating: data.rating,
       genres,
       platforms: data.platforms,

@@ -57,13 +57,13 @@ router.get("/videogame/:idVideogame", async (req, res) => {
 });
 
 router.post("/videogame", async (req, res) => {
-  let { name, description, release, rating, platforms, genres } = req.body;
+  let { name, description, released, rating, platforms, genres } = req.body;
 
   try {
     let videogame = await Videogame.create({
       name,
       description,
-      release,
+      released,
       rating,
       platforms,
     });
