@@ -1,12 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import SelectFilters from "./SelectFilters.jsx";
 import logo from "../../assets/res/logo.png";
 import styles from "../../assets/styles/navbar.module.css";
 
 function NavBar() {
-  const [order, setOrder] = React.useState("append");
-
   return (
     <div className={styles.container}>
       <div className={styles.otro}>
@@ -20,14 +19,7 @@ function NavBar() {
 
       <div className={styles.filters}>
         <label>ORDER BY</label>
-        <select defaultValue={order} onChange={(e) => setOrder(e.target.value)}>
-          <option value="append">append</option>
-          <option value="exists">exists</option>
-          <option value="genres">genres</option>
-          <option value="rating">rating</option>
-          <option value="asc">alphabet asc</option>
-          <option value="desc">Alphabet desc</option>
-        </select>
+        <SelectFilters />
       </div>
       <div className={styles.search}>
         <SearchBar />

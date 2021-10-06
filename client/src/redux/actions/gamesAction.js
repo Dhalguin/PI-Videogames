@@ -1,6 +1,14 @@
 export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
+export const CHANGE_ORDER = "CHANGE_ORDER";
+
+export const changeOrder = (order) => {
+  return {
+    type: CHANGE_ORDER,
+    payload: order,
+  };
+};
 
 // thunk
 export function getVideogames(page, limit, name = "") {

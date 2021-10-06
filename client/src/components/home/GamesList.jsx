@@ -14,20 +14,24 @@ function GamesList() {
 
   return (
     <div className={styles.container}>
-      {videogames.length > 0 ? (
-        <div className={styles.list}>
-          {videogames.map((videogame) => (
-            <Card
-              key={videogame.id}
-              id={videogame.id}
-              name={videogame.name}
-              img={videogame.background_image}
-              genres={videogame.genres}
-            />
-          ))}
+      {videogames && (
+        <div>
+          {videogames.length > 0 ? (
+            <div className={styles.list}>
+              {videogames.map((videogame) => (
+                <Card
+                  key={videogame.id}
+                  id={videogame.id}
+                  name={videogame.name}
+                  img={videogame.background_image}
+                  genres={videogame.genres}
+                />
+              ))}
+            </div>
+          ) : (
+            <div>There are no videogames</div>
+          )}
         </div>
-      ) : (
-        <div>There are no videogames</div>
       )}
     </div>
   );
