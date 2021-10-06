@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function AddGameForm({
   styles,
@@ -9,12 +9,11 @@ function AddGameForm({
   setGenres,
 }) {
   const handleGenres = (e) => {
+    let index = parseInt(e.target.value);
     if (document.getElementById(e.target.value).checked) {
-      setGenres((state) => [...state, ...parseInt(e.target.value)]);
+      setGenres((state) => [...state, index]);
     } else {
-      setGenres((state) =>
-        state.filter((element) => element !== e.target.value)
-      );
+      setGenres((state) => state.filter((element) => element !== index));
     }
   };
 
@@ -70,17 +69,19 @@ function AddGameForm({
             onChange={handleOnChange}
           />
         </div>
-        <div>
+        <div className={`form-group d-flex ${styles.genres}`}>
           {state.genres.map((genre) => (
-            <React.Fragment key={genre.id}>
-              <input
-                type="checkbox"
-                id={genre.id}
-                value={genre.id}
-                onChange={handleGenres}
-              />
-              <label htmlFor={genre.id}>{genre.name}</label>
-            </React.Fragment>
+            <div key={genre.id}>
+              <label htmlFor={genre.id}>
+                <input
+                  type="checkbox"
+                  id={genre.id}
+                  value={genre.id}
+                  onChange={handleGenres}
+                />
+                {genre.name}
+              </label>
+            </div>
           ))}
         </div>
         <div className="form-group text-center">

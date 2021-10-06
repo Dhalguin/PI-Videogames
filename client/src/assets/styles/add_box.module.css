@@ -1,5 +1,5 @@
 .container {
-  height: 85vh;
+  height: 90vh;
   flex-direction: column;
 }
 
@@ -11,7 +11,7 @@
 .box {
   padding: 1em;
   width: 50vw;
-  height: 65vh;
+  height: 80vh;
   color: #434343;
   background-color: #fff;
   border-radius: 1em;
@@ -40,6 +40,20 @@
 .box textarea {
   height: 100px;
   resize: none;
+}
+
+.box input[type="checkbox"] {
+  width: auto;
+}
+
+.genres {
+  padding: 12px 0;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.genres div {
+  margin: 5px;
 }
 
 .box button {

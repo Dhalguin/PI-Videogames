@@ -6,6 +6,7 @@ import styles from "../assets/styles/add_box.module.css";
 function AddGamesPage() {
   const state = useSelector((state) => state.genres);
   const [genres, setGenres] = React.useState([]);
+  const [formId, setFormId] = React.useState("");
   const [videogame, setVideogame] = React.useState({
     title: "",
     description: "",
@@ -14,14 +15,13 @@ function AddGamesPage() {
     platforms: "",
   });
 
-  console.log(genres);
-
   const addVideogame = (data) => {
     let videogame = {
       name: data.title,
       description: data.description,
       release: data.released,
       rating: data.rating,
+      genres,
       platforms: data.platforms,
     };
 
@@ -31,7 +31,11 @@ function AddGamesPage() {
       body: JSON.stringify(videogame),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        console.log(data);
+        // let form = document.getElementById("form").reset();
+        console.log(formId);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -58,7 +62,6 @@ function AddGamesPage() {
       [e.target.name]: e.target.value,
     });
   };
-  console.log(genres);
 
   return (
     <div className={`${styles.container} center`}>
@@ -68,6 +71,7 @@ function AddGamesPage() {
         videogame={videogame}
         state={state}
         setGenres={setGenres}
+        setFormId={setFormId}
         handleOnChange={handleOnChange}
         handleOnSubmit={handleOnSubmit}
       />
