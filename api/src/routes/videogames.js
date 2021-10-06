@@ -82,7 +82,17 @@ router.post("/videogame", async (req, res) => {
 });
 
 const getVideogames = async (page, limit) => {
-  let responseDB = await Videogame.findAll();
+  let responseDB = await Videogame.findAll({
+    include: [
+      {
+        model: Genres,
+        attributes: ["name"],
+        through: {
+          attributes: [],
+        },
+      },
+    ],
+  });
 
   let response = await axios.get(
     `https://api.rawg.io/api/games?&key=${apiKey}`
