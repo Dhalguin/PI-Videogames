@@ -25,7 +25,7 @@ h1 {
   position: relative;
 }
 
-button {
+.container button {
   width: 300px;
   height: 70px;
   background: none;
@@ -40,7 +40,7 @@ button {
   transition: all ease 0.2s;
 }
 
-button:active {
+.container button:active {
   box-shadow: 0 2px 1px #fff;
   transform: translateY(4px);
 }
