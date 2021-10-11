@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeOrder } from "../../redux/actions/gamesAction.js";
+import { changeOrder, changeGenre } from "../../redux/actions/gamesAction.js";
 
 function SelectFilters({ styles }) {
   const dispatch = useDispatch();
@@ -23,7 +23,7 @@ function SelectFilters({ styles }) {
       <select
         name="genres"
         id="genres"
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => dispatch(changeGenre(e.target.value))}
       >
         <option value="All">All</option>
         <option value="Indie">Indie</option>

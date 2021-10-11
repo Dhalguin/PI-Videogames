@@ -3,6 +3,7 @@ import {
   GET_DETAILS,
   GET_GENRES,
   CHANGE_ORDER,
+  CHANGE_GENRE,
 } from "../actions/gamesAction.js";
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   details: {},
   genres: {},
   order: "append",
+  filterGenre: "All",
 };
 
 export default function gamesReducer(state = initialState, action) {
@@ -33,6 +35,11 @@ export default function gamesReducer(state = initialState, action) {
       return {
         ...state,
         order: action.payload,
+      };
+    case CHANGE_GENRE:
+      return {
+        ...state,
+        filterGenre: action.payload,
       };
     default:
       return state;

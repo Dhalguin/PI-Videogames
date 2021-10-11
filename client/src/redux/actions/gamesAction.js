@@ -2,11 +2,19 @@ export const GET_VIDEOGAMES = "GET_VIDEOGAMES";
 export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
 export const CHANGE_ORDER = "CHANGE_ORDER";
+export const CHANGE_GENRE = "CHANGE_GENRE";
 
 export const changeOrder = (order) => {
   return {
     type: CHANGE_ORDER,
     payload: order,
+  };
+};
+
+export const changeGenre = (genre) => {
+  return {
+    type: CHANGE_GENRE,
+    payload: genre,
   };
 };
 
