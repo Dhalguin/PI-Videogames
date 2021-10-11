@@ -13,10 +13,14 @@ function DetailsGame(props) {
     });
   }
 
-  if (platformsArr) {
-    platformsArr.forEach((element) => {
-      platforms.push(element.platform.name);
-    });
+  if (Array.isArray(platformsArr)) {
+    if (platformsArr) {
+      platformsArr.forEach((element) => {
+        platforms.push(element.platform.name);
+      });
+    }
+  } else {
+    platforms = platformsArr;
   }
 
   return (
@@ -39,8 +43,10 @@ function DetailsGame(props) {
           </div>
           <div className={styles.body}>
             {description}
-            {/* <p>{genres.join(", ")}</p>
-            <p>{platforms.join(", ")}</p> */}
+            <div>
+              <p>{genres}</p>
+              <p>{platforms}</p>
+            </div>
           </div>
         </div>
       </div>
