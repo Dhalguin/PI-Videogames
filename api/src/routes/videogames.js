@@ -125,7 +125,7 @@ const getVideogames = async (page, limit) => {
     let videogames = results.slice(startIndex, endIndex);
 
     const getNextPage = (page, limit, count) => {
-      if (count / limit > page) return page + 1;
+      if (Math.ceil(count / limit) > page) return page + 1;
       return null;
     };
 
@@ -133,7 +133,6 @@ const getVideogames = async (page, limit) => {
       if (page <= 1) return null;
       return page - 1;
     };
-
     return {
       nextPage: getNextPage(currentPage, limit, results.length),
       previousPage: getPrevPage(currentPage),
