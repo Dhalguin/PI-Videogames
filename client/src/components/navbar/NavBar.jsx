@@ -18,7 +18,6 @@ function NavBar() {
       </div>
 
       <div className={styles.filters}>
-        <label>ORDER BY</label>
         <SelectFilters />
       </div>
       <div className={styles.search}>

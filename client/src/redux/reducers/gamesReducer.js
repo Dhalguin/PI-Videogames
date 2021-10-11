@@ -31,6 +31,7 @@ export default function gamesReducer(state = initialState, action) {
       };
     case CHANGE_ORDER:
       return {
+        ...state,
         order: action.payload,
       };
     default:

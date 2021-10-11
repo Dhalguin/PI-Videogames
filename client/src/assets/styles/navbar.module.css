@@ -19,9 +19,9 @@
 }
 
 .filters > label {
+  margin-left: 10px;
   color: #fff;
   margin-right: 0.5em;
-  font-size: 14px;
 }
 
 .filters > select {
