@@ -82,30 +82,68 @@ router.post("/videogame", async (req, res) => {
 });
 
 const getVideogames = async (page, limit) => {
-  let responseDB = await Videogame.findAll({
-    include: [
-      {
-        model: Genres,
-        attributes: ["name"],
-        through: {
-          attributes: [],
+  try {
+    let videogamesDB = await Videogame.findAll({
+      include: [
+        {
+          model: Genres,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
         },
-      },
-    ],
-  });
+      ],
+    });
 
-  let response = await axios.get(
-    `https://api.rawg.io/api/games?&key=${apiKey}`
-  );
+    let response = await axios.get(
+      `https://api.rawg.io/api/games?&key=${apiKey}`
+    );
 
-  let results = [].concat(responseDB).concat(response.data.results);
+    let response2 = await axios.get(response.data.next);
 
-  let startIndex = (page - 1) * limit;
-  let endIndex = page * limit;
+    let response3 = await axios.get(response2.data.next);
 
-  let videogames = results.slice(startIndex, endIndex);
+    let response4 = await axios.get(response3.data.next);
 
-  return videogames;
+    let response5 = await axios.get(response4.data.next);
+
+    let videogamesAPI = [].concat(
+      response.data.results,
+      response2.data.results,
+      response3.data.results,
+      response4.data.results,
+      response5.data.results
+    );
+
+    let results = [].concat(videogamesDB).concat(videogamesAPI);
+
+    let currentPage = parseInt(page);
+
+    let startIndex = (page - 1) * limit;
+    let endIndex = page * limit;
+
+    let videogames = results.slice(startIndex, endIndex);
+
+    const getNextPage = (page, limit, count) => {
+      if (count / limit > page) return page + 1;
+      return null;
+    };
+
+    const getPrevPage = (page) => {
+      if (page <= 1) return null;
+      return page - 1;
+    };
+
+    return {
+      nextPage: getNextPage(currentPage, limit, results.length),
+      previousPage: getPrevPage(currentPage),
+      currentPage: currentPage,
+      total: results.length,
+      videogames,
+    };
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 const getVideogameById = async (id) => {
