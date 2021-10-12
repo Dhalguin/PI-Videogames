@@ -1,11 +1,24 @@
 .container {
-  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
-.container > button {
-  margin: 0 1em 1em 1em;
-  width: 7em;
+.container span {
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-bottom: 1em;
+  font-size: 1.4em;
+  color: #fff;
+}
+
+.container button {
+  margin-bottom: 1em;
+  width: 1em;
   height: 40px;
-  font-size: 1.5em;
+  font-size: 1.8em;
+  color: #fff;
+  background: none;
+  border: none;
   cursor: pointer;
 }
