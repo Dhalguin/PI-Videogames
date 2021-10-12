@@ -1,19 +1,26 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getGenres } from "../redux/actions/gamesAction.js";
 import AddGameForm from "../components/add/AddGameForm";
+import Spinner from "../components/spinner/Spinner.jsx";
 import styles from "../assets/styles/add_box.module.css";
 
 function AddGamesPage() {
+  const dispatch = useDispatch();
   const state = useSelector((state) => state.genres);
   const [genres, setGenres] = React.useState([]);
-  const [formId, setFormId] = React.useState("");
   const [videogame, setVideogame] = React.useState({
     title: "",
     description: "",
     released: "",
     rating: "",
     platforms: "",
+    background_image: "",
   });
+
+  React.useEffect(() => {
+    if (!state.genres) dispatch(getGenres());
+  }, []);
 
   const addVideogame = (data) => {
     let videogame = {
@@ -23,6 +30,7 @@ function AddGamesPage() {
       rating: data.rating,
       genres,
       platforms: data.platforms,
+      background_image: data.background_image,
     };
 
     fetch(`http://localhost:3001/videogame`, {
@@ -33,8 +41,6 @@ function AddGamesPage() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
-        // let form = document.getElementById("form").reset();
-        console.log(formId);
       })
       .catch((err) => console.log(err));
   };
@@ -65,16 +71,18 @@ function AddGamesPage() {
 
   return (
     <div className={`${styles.container} center`}>
-      <h2>ADD NEW VIDEOGAME</h2>
-      <AddGameForm
-        styles={styles}
-        videogame={videogame}
-        state={state}
-        setGenres={setGenres}
-        setFormId={setFormId}
-        handleOnChange={handleOnChange}
-        handleOnSubmit={handleOnSubmit}
-      />
+      {state.genres ? (
+        <AddGameForm
+          styles={styles}
+          videogame={videogame}
+          state={state}
+          setGenres={setGenres}
+          handleOnChange={handleOnChange}
+          handleOnSubmit={handleOnSubmit}
+        />
+      ) : (
+        <Spinner />
+      )}
     </div>
   );
 }

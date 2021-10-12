@@ -1,17 +1,12 @@
 .container {
-  height: 90vh;
+  height: 92vh;
   flex-direction: column;
-}
-
-.container h2 {
-  color: #fff;
-  letter-spacing: 5px;
 }
 
 .box {
   padding: 1em;
   width: 50vw;
-  height: 80vh;
+  height: 85vh;
   color: #434343;
   background-color: #fff;
   border-radius: 1em;

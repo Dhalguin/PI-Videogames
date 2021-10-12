@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 function AddGameForm({
   styles,
@@ -19,7 +19,7 @@ function AddGameForm({
 
   return (
     <div className={`${styles.box} center`}>
-      <form>
+      <form autoComplete="off">
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
@@ -27,6 +27,16 @@ function AddGameForm({
             name="title"
             id="title"
             value={videogame.title}
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="img">Image URL</label>
+          <input
+            type="text"
+            name="background_image"
+            id="background_image"
+            value={videogame.background_image}
             onChange={handleOnChange}
           />
         </div>
