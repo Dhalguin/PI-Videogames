@@ -48,6 +48,8 @@ function GamesList({ videogames }) {
   if (videogames) filterByOrder();
   filterByGenre();
 
+  console.log(videogames);
+
   return (
     <div className={styles.container}>
       {videogames && (
