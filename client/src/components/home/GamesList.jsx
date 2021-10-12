@@ -7,7 +7,7 @@ import styles from "../../assets/styles/list.module.css";
 function GamesList() {
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
-  var videogames = state.videogames;
+  var videogames = state.videogames.videogames;
   const order = state.order;
   const genre = state.filterGenre;
   var videogamesByGenre = [];
@@ -52,7 +52,7 @@ function GamesList() {
     }
   };
 
-  filterByOrder();
+  if (videogames) filterByOrder();
   filterByGenre();
 
   return (

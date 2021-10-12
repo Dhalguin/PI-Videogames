@@ -25,30 +25,23 @@ function DetailsGame(props) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.card}>
-        <p className={styles.title}>{name}</p>
-        <div className="d-flex">
-          <div>
-            <img
-              src={background_image}
-              alt={`${name}-${id}`}
-              style={{ height: "300px", width: "300px" }}
-            />
-            <p>
-              <b>Released:</b> {released}
-            </p>
-            <p>
-              <b>Rating:</b> {rating}
-            </p>
-          </div>
-          <div className={styles.body}>
-            {description}
-            <div>
-              <p>{genres}</p>
-              <p>{platforms}</p>
-            </div>
-          </div>
-        </div>
+      <div>
+        <h2 className={`${styles.title} text-gray`}>{name}</h2>
+      </div>
+      <div>
+        <img src={background_image} alt={`#${name}_${id}`} />
+      </div>
+      <div>
+        <p className={`${styles.description} text-gray`}>{description}</p>
+        <p className="text-gray">
+          <b>Released:</b> {released}
+        </p>
+        <p className="text-gray">
+          <b>Genre:</b> {genres}
+        </p>
+        <p className="text-gray">
+          <b>Platforms:</b> {platforms}
+        </p>
       </div>
     </div>
   );
