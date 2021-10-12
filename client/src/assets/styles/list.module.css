@@ -5,6 +5,5 @@
 .list {
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
   display: flex;
 }

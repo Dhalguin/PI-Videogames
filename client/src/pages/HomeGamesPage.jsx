@@ -10,7 +10,7 @@ import Spinner from "../components/spinner/Spinner.jsx";
 function HomeGamesPage() {
   const dispatch = useDispatch();
   const results = useSelector((state) => state.videogames);
-  const [current, setCurrent] = React.useState(1);
+  const [current, setCurrent] = React.useState(5);
 
   const isLoading = useSelector((state) => state.isLoading);
 
