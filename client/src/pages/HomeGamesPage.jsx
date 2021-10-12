@@ -10,7 +10,7 @@ import Spinner from "../components/spinner/Spinner.jsx";
 function HomeGamesPage() {
   const dispatch = useDispatch();
   const results = useSelector((state) => state.videogames);
-  const [current, setCurrent] = React.useState(5);
+  const [current, setCurrent] = React.useState(1);
 
   const isLoading = useSelector((state) => state.isLoading);
 
@@ -19,16 +19,16 @@ function HomeGamesPage() {
   }, []);
 
   useEffect(() => {
-    dispatch(getVideogames(current, 20));
+    dispatch(getVideogames(current, 15));
   }, [current]);
 
-  const handleNext = () => {
-    setCurrent(results.nextPage);
-  };
+  const handleNext = () => setCurrent(results.nextPage);
 
-  const handlePrev = () => {
-    setCurrent(results.previousPage);
-  };
+  const handlePrev = () => setCurrent(results.previousPage);
+
+  const firstPage = () => setCurrent(1);
+
+  const lastPage = () => setCurrent(Math.ceil(results.total / 15));
 
   return (
     <>
@@ -40,15 +40,19 @@ function HomeGamesPage() {
           <Spinner />
         </div>
       ) : (
-        <GamesList videogames={results.videogames || results} />
+        <>
+          <GamesList videogames={results.videogames || results} />
+          <Pagination
+            current={results.currentPage}
+            next={results.nextPage}
+            previous={results.previousPage}
+            handleNext={handleNext}
+            handlePrev={handlePrev}
+            firstPage={firstPage}
+            lastPage={lastPage}
+          />
+        </>
       )}
-      <Pagination
-        current={results.currentPage}
-        next={results.nextPage}
-        previous={results.previousPage}
-        handleNext={handleNext}
-        handlePrev={handlePrev}
-      />
       <FloatingButton />
     </>
   );
