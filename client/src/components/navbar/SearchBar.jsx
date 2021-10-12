@@ -9,7 +9,7 @@ function SearchBar() {
 
   const handleSubmit = () => {
     if (title) dispatch(getVideogames(1, 15, title));
-    else alert("Write a validate title");
+    else dispatch(getVideogames(1, 20));
   };
 
   return (
