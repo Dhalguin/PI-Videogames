@@ -53,7 +53,6 @@ function GamesList({ videogames }) {
         }
       }
     }
-    console.log(videogamesByExistence);
   };
 
   if (videogames) {
@@ -61,19 +60,6 @@ function GamesList({ videogames }) {
     filterByGenre();
     filterByExistence();
   }
-
-  const removeDuplicates = (array) => {
-    var arr = array.concat();
-
-    for (let i = 0; i < arr.length; i++) {
-      for (let a = i + 1; a < arr.length; a++) {
-        if (arr[i] === arr[a]) {
-          arr.splice(a, 1);
-        }
-      }
-    }
-    return arr;
-  };
 
   return (
     <div className={styles.container}>
@@ -111,17 +97,7 @@ function GamesList({ videogames }) {
                       genres={videogame.genres}
                     />
                   ))
-                : removeDuplicates(
-                    videogamesByGenre.concat(videogamesByExistence)
-                  ).map((videogame) => (
-                    <Card
-                      key={videogame.id}
-                      id={videogame.id}
-                      name={videogame.name}
-                      img={videogame.background_image}
-                      genres={videogame.genres}
-                    />
-                  ))}
+                : null}
             </div>
           ) : (
             <div>There are no videogames</div>
