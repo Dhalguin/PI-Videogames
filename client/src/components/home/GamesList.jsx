@@ -1,20 +1,13 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { getVideogames } from "../../redux/actions/gamesAction.js";
+import React from "react";
+import { useSelector } from "react-redux";
 import Card from "../card/Card.jsx";
 import styles from "../../assets/styles/list.module.css";
 
-function GamesList() {
-  const dispatch = useDispatch();
+function GamesList({ videogames }) {
   const state = useSelector((state) => state);
-  var videogames = state.videogames.videogames;
   const order = state.order;
   const genre = state.filterGenre;
   var videogamesByGenre = [];
-
-  useEffect(() => {
-    dispatch(getVideogames(1, 20));
-  }, []);
 
   const filterByOrder = () => {
     if (order === "exists") {
