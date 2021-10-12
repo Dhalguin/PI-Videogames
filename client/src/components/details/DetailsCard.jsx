@@ -3,24 +3,17 @@ import styles from "../../assets/styles/details_card.module.css";
 
 function DetailsGame(props) {
   const { id, name, background_image, description } = props;
-  const { genresArr, released, rating, platformsArr } = props;
-  var genres = [];
-  var platforms = [];
+  const { genres, released, rating, platforms } = props;
+  var platf = [];
 
-  if (genresArr) {
-    genresArr.forEach((genre) => {
-      genres.push(genre.name);
-    });
-  }
+  console.log(platforms);
 
-  if (Array.isArray(platformsArr)) {
-    if (platformsArr) {
-      platformsArr.forEach((element) => {
-        platforms.push(element.platform.name);
-      });
+  if (platforms) {
+    if (Array.isArray(platforms)) {
+      platf = platforms.map((platforms) => platforms.platform.name).join(" - ");
+    } else {
+      platf = platforms.split(",").join(" - ");
     }
-  } else {
-    platforms = platformsArr;
   }
 
   return (
@@ -37,10 +30,14 @@ function DetailsGame(props) {
           <b>Released:</b> {released}
         </p>
         <p className="text-gray">
-          <b>Genre:</b> {genres}
+          <b>Rating:</b> {rating}
         </p>
         <p className="text-gray">
-          <b>Platforms:</b> {platforms}
+          <b>Genres:</b>{" "}
+          {genres && genres.map((genre) => genre.name).join(" - ")}
+        </p>
+        <p className="text-gray">
+          <b>Platforms:</b> {platf}
         </p>
       </div>
     </div>

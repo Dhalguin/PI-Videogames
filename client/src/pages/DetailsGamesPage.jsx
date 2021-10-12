@@ -21,10 +21,10 @@ function DetailsGamesPage() {
         name={details.name}
         background_image={details.background_image}
         description={details.description}
-        genresArr={details.genres}
+        genres={details.genres}
         released={details.released}
         rating={details.rating}
-        platformsArr={details.platforms}
+        platforms={details.platforms}
       />
     </>
   );
