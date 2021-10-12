@@ -14,7 +14,7 @@ function Pagination({
     <div className={styles.container}>
       {previous && <button onClick={() => firstPage()}>First</button>}
       {previous && <button onClick={() => handlePrev()}>{`<`}</button>}
-      <span>{current}</span>
+      {current && <span>{current}</span>}
       {next && <button onClick={() => handleNext()}>{`>`}</button>}
       {next && <button onClick={() => lastPage()}>Last</button>}
     </div>
