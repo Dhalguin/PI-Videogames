@@ -28,7 +28,7 @@ function HomeGamesPage() {
 
   return (
     <>
-      <GamesList videogames={results.videogames} />
+      <GamesList videogames={results.videogames || results} />
       <Pagination
         current={results.currentPage}
         next={results.nextPage}

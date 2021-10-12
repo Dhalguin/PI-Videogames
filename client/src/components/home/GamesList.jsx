@@ -36,17 +36,21 @@ function GamesList({ videogames }) {
   const filterByGenre = () => {
     if (genre !== "All") {
       for (let i = 0; i < videogames.length; i++) {
-        for (let a = 0; a < videogames[i].genres.length; a++) {
-          if (videogames[i].genres[a].name === genre) {
-            videogamesByGenre.push(videogames[i]);
+        if (videogames[i].genres) {
+          for (let a = 0; a < videogames[i].genres.length; a++) {
+            if (videogames[i].genres[a].name === genre) {
+              videogamesByGenre.push(videogames[i]);
+            }
           }
         }
       }
     }
   };
 
-  if (videogames) filterByOrder();
-  filterByGenre();
+  if (videogames) {
+    filterByOrder();
+    filterByGenre();
+  }
 
   console.log(videogames);
 
