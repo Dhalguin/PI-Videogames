@@ -1,4 +1,5 @@
 import React from "react";
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getGenres } from "../redux/actions/gamesAction.js";
 import AddGameForm from "../components/add/AddGameForm";
@@ -6,6 +7,7 @@ import Spinner from "../components/spinner/Spinner.jsx";
 import styles from "../assets/styles/add_box.module.css";
 
 function AddGamesPage() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const state = useSelector((state) => state.genres);
   const [genres, setGenres] = React.useState([]);
@@ -40,7 +42,8 @@ function AddGamesPage() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
+        alert(`The ${data.videogame.name} videogame added to DB successfully`);
+        history.push("/videogames");
       })
       .catch((err) => console.log(err));
   };
