@@ -13,27 +13,7 @@
   color: #fff;
 }
 
-.filters {
-  text-align: right;
-  flex-grow: 2;
-}
-
-.filters > label {
-  margin-left: 10px;
-  color: #fff;
-  margin-right: 0.5em;
-}
-
-.filters > select {
-  width: 30%;
-  background-color: #0f0d0d;
-  color: #fff;
-  font-size: 0.9em;
-  padding: 5px;
-  border-radius: 5px;
-}
-
 .search {
   text-align: right;
-  flex-grow: 2;
+  flex-grow: 1;
 }

@@ -4,6 +4,7 @@ import { getGenres, getVideogames } from "../redux/actions/gamesAction.js";
 import GamesList from "../components/home/GamesList";
 import FloatingButton from "../components/add/FloatingButton";
 import Pagination from "../components/pagination/Pagination.jsx";
+import SelectFilters from "../components/navbar/SelectFilters.jsx";
 import Spinner from "../components/spinner/Spinner.jsx";
 
 function HomeGamesPage() {
@@ -31,6 +32,9 @@ function HomeGamesPage() {
 
   return (
     <>
+      <div>
+        <SelectFilters />
+      </div>
       {isLoading ? (
         <div className="align-center">
           <Spinner />

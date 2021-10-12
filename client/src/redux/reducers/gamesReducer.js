@@ -4,6 +4,7 @@ import {
   GET_GENRES,
   CHANGE_ORDER,
   CHANGE_GENRE,
+  CHANGE_EXISTENCE,
   IS_LOADING,
 } from "../actions/gamesAction.js";
 
@@ -11,8 +12,9 @@ const initialState = {
   videogames: [],
   details: {},
   genres: {},
-  order: "append",
+  order: "asc",
   filterGenre: "All",
+  filterExistence: "All",
   isLoading: false,
 };
 
@@ -47,6 +49,11 @@ export default function gamesReducer(state = initialState, action) {
       return {
         ...state,
         filterGenre: action.payload,
+      };
+    case CHANGE_EXISTENCE:
+      return {
+        ...state,
+        filterExistence: action.payload,
       };
     default:
       return state;

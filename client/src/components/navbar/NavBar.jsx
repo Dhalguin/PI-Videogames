@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
-import SelectFilters from "./SelectFilters.jsx";
 import logo from "../../assets/res/logo.png";
 import styles from "../../assets/styles/navbar.module.css";
 
@@ -15,10 +14,6 @@ function NavBar() {
             <span className={styles.title}>SOY HENRY</span>
           </div>
         </Link>
-      </div>
-
-      <div className={styles.filters}>
-        <SelectFilters />
       </div>
       <div className={styles.search}>
         <SearchBar />

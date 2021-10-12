@@ -3,6 +3,7 @@ export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
 export const CHANGE_ORDER = "CHANGE_ORDER";
 export const CHANGE_GENRE = "CHANGE_GENRE";
+export const CHANGE_EXISTENCE = "CHANGE_EXISTENCE";
 export const IS_LOADING = "IS_LOADING";
 
 export const changeOrder = (order) => {
@@ -16,6 +17,13 @@ export const changeGenre = (genre) => {
   return {
     type: CHANGE_GENRE,
     payload: genre,
+  };
+};
+
+export const changeExistence = (existence) => {
+  return {
+    type: CHANGE_EXISTENCE,
+    payload: existence,
   };
 };
 

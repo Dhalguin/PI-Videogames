@@ -1,25 +1,28 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeOrder, changeGenre } from "../../redux/actions/gamesAction.js";
+import {
+  changeOrder,
+  changeGenre,
+  changeExistence,
+} from "../../redux/actions/gamesAction.js";
+import styles from "../../assets/styles/filters.module.css";
 
-function SelectFilters({ styles }) {
+function SelectFilters() {
   const dispatch = useDispatch();
   const order = useSelector((state) => state.order);
 
   return (
-    <>
+    <div className={styles.filters}>
       <label>Order by</label>
       <select
         defaultValue={order}
         onChange={(e) => dispatch(changeOrder(e.target.value))}
       >
-        <option value="append">append</option>
-        <option value="exists">exists</option>
+        <option value="asc">alphabet A-Z</option>
+        <option value="desc">alphabet Z-A</option>
         <option value="rating">rating</option>
-        <option value="asc">alphabet asc</option>
-        <option value="desc">Alphabet desc</option>
       </select>
-      <label>Géneros</label>
+      <label>Filter by Genres</label>
       <select
         name="genres"
         id="genres"
@@ -46,7 +49,17 @@ function SelectFilters({ styles }) {
         <option value="Racing">Racing</option>
         <option value="Board Games">Board Games</option>
       </select>
-    </>
+      <label>Filter by Existence</label>
+      <select
+        name="existence"
+        id="existence"
+        onChange={(e) => dispatch(changeExistence(e.target.value))}
+      >
+        <option value="All">All</option>
+        <option value="append">append</option>
+        <option value="exists">exists</option>
+      </select>
+    </div>
   );
 }
 
