@@ -4,6 +4,7 @@ import {
   GET_GENRES,
   CHANGE_ORDER,
   CHANGE_GENRE,
+  IS_LOADING,
 } from "../actions/gamesAction.js";
 
 const initialState = {
@@ -12,10 +13,16 @@ const initialState = {
   genres: {},
   order: "append",
   filterGenre: "All",
+  isLoading: false,
 };
 
 export default function gamesReducer(state = initialState, action) {
   switch (action.type) {
+    case IS_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
+      };
     case GET_VIDEOGAMES:
       return {
         ...state,

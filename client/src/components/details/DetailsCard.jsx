@@ -6,8 +6,6 @@ function DetailsGame(props) {
   const { genres, released, rating, platforms } = props;
   var platf = [];
 
-  console.log(platforms);
-
   if (platforms) {
     if (Array.isArray(platforms)) {
       platf = platforms.map((platforms) => platforms.platform.name).join(" - ");

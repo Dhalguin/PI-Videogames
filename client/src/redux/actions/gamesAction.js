@@ -3,6 +3,7 @@ export const GET_DETAILS = "GET_DETAILS";
 export const GET_GENRES = "GET_GENRES";
 export const CHANGE_ORDER = "CHANGE_ORDER";
 export const CHANGE_GENRE = "CHANGE_GENRE";
+export const IS_LOADING = "IS_LOADING";
 
 export const changeOrder = (order) => {
   return {
@@ -18,25 +19,36 @@ export const changeGenre = (genre) => {
   };
 };
 
+export const isLoading = (bool) => {
+  return {
+    type: IS_LOADING,
+    payload: bool,
+  };
+};
+
 // thunk
 export function getVideogames(page, limit, name = "") {
   return function (dispatch) {
+    dispatch({ type: IS_LOADING, payload: true });
     fetch(
       `http://localhost:3001/videogames?page=${page}&limit=${limit}&name=${name}`
     )
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: GET_VIDEOGAMES, payload: data });
+        dispatch({ type: IS_LOADING, payload: false });
       });
   };
 }
 
 export function getVideogameDetails(id) {
   return function (dispatch) {
+    dispatch({ type: IS_LOADING, payload: true });
     fetch(`http://localhost:3001/videogame/${id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: GET_DETAILS, payload: data });
+        dispatch({ type: IS_LOADING, payload: false });
       });
   };
 }

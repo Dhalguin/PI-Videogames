@@ -15,6 +15,13 @@ body {
   text-align: center;
 }
 
+.align-center {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .text-gray {
   color: rgba(255, 255, 255, 0.75);
 }
