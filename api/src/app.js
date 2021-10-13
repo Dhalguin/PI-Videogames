@@ -1,8 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const morgan = require("morgan");
-const gamesRoutes = require("./routes/videogames.js");
-const genresRoutes = require("./routes/genres.js");
+const routes = require("./routes");
 
 require("./db.js");
 
@@ -25,8 +24,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use("/", gamesRoutes);
-server.use("/genres", genresRoutes);
+server.use("/", routes);
 
 // Error catching endware.
 server.use((err, req, res, next) => {

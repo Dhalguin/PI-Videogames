@@ -3,15 +3,13 @@ const { Router } = require("express");
 const axios = require("axios");
 const { Op } = require("sequelize");
 const { Videogame, Genres } = require("../db.js");
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
 
 const router = Router();
 const apiKey = process.env.API_KEY;
 
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
-router.get("/videogames", async (req, res) => {
+router.get("/", async (req, res) => {
   let { page, limit, name } = req.query;
 
   try {
@@ -39,7 +37,7 @@ router.get("/videogames", async (req, res) => {
   }
 });
 
-router.get("/videogame/:idVideogame", async (req, res) => {
+router.get("/:idVideogame", async (req, res) => {
   let { idVideogame } = req.params;
 
   try {
@@ -56,7 +54,7 @@ router.get("/videogame/:idVideogame", async (req, res) => {
   }
 });
 
-router.post("/videogame", async (req, res) => {
+router.post("/", async (req, res) => {
   let {
     name,
     description,

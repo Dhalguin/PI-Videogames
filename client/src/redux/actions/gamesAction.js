@@ -52,7 +52,7 @@ export function getVideogames(page, limit, name = "") {
 export function getVideogameDetails(id) {
   return function (dispatch) {
     dispatch({ type: IS_LOADING, payload: true });
-    fetch(`http://localhost:3001/videogame/${id}`)
+    fetch(`http://localhost:3001/videogames/${id}`)
       .then((res) => res.json())
       .then((data) => {
         dispatch({ type: GET_DETAILS, payload: data });
