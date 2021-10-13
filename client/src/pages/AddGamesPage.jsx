@@ -35,7 +35,7 @@ function AddGamesPage() {
       background_image: data.background_image,
     };
 
-    fetch(`http://localhost:3001/videogame`, {
+    fetch(`http://localhost:3001/videogames`, {
       headers: { "Content-Type": "application/json" },
       method: "POST",
       body: JSON.stringify(videogame),
