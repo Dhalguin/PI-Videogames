@@ -9,26 +9,25 @@ import Spinner from "../components/spinner/Spinner.jsx";
 
 function HomeGamesPage() {
   const dispatch = useDispatch();
-  const results = useSelector((state) => state.videogames);
   const [current, setCurrent] = React.useState(1);
+  const state = useSelector((state) => state);
 
-  const isLoading = useSelector((state) => state.isLoading);
+  const videogames = state.videogames;
+  const isLoading = state.isLoading;
+  const genres = state.genres.genres;
 
   useEffect(() => {
-    dispatch(getGenres());
+    if (!genres) dispatch(getGenres());
   }, []);
 
   useEffect(() => {
     dispatch(getVideogames(current, 15));
   }, [current]);
 
-  const handleNext = () => setCurrent(results.nextPage);
-
-  const handlePrev = () => setCurrent(results.previousPage);
-
+  const handleNext = () => setCurrent(videogames.nextPage);
+  const handlePrev = () => setCurrent(videogames.previousPage);
   const firstPage = () => setCurrent(1);
-
-  const lastPage = () => setCurrent(Math.ceil(results.total / 15));
+  const lastPage = () => setCurrent(Math.ceil(videogames.total / 15));
 
   return (
     <>
@@ -41,11 +40,11 @@ function HomeGamesPage() {
         </div>
       ) : (
         <>
-          <GamesList videogames={results.videogames || results} />
+          <GamesList videogames={videogames.videogames || videogames} />
           <Pagination
-            current={results.currentPage}
-            next={results.nextPage}
-            previous={results.previousPage}
+            current={videogames.currentPage}
+            next={videogames.nextPage}
+            previous={videogames.previousPage}
             handleNext={handleNext}
             handlePrev={handlePrev}
             firstPage={firstPage}
