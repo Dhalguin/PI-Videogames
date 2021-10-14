@@ -14,18 +14,35 @@ router.get("/", async (req, res) => {
 
   try {
     if (name) {
-      let videogames = await getVideogameByName(name);
+      let results = await getVideogameByName(name);
 
-      if (!videogames)
+      if (!results)
         return res
           .status(404)
           .json({ response: "FAILED", message: "Videogames not found" });
+
+      let videogames = results.map((videogame) => {
+        return {
+          id: videogame.id,
+          name: videogame.name,
+          background_image: videogame.background_image,
+          genres: videogame.genres,
+          rating: videogame.rating,
+        };
+      });
+
       return res.status(200).json(videogames);
     }
 
-    let videogames = await getAllVideogames(page, limit);
+    let results = await getAllVideogames(page, limit);
 
-    let response = videogames.videogames.map((videogame) => {
+    if (!results)
+      return res.status(401).json({
+        response: "FAILED",
+        message: "There are no Videogames",
+      });
+
+    let response = results.videogames.map((videogame) => {
       return {
         id: videogame.id,
         name: videogame.name,
@@ -35,17 +52,9 @@ router.get("/", async (req, res) => {
       };
     });
 
-    if (!videogames)
-      return res.status(401).json({
-        response: "FAILED",
-        message: "There are no Videogames",
-      });
+    results.videogames = response;
 
-    videogames.videogames = response;
-
-    console.log(videogames);
-
-    res.status(200).json(videogames);
+    res.status(200).json(results);
   } catch (err) {
     res.status(500).json(err);
   }

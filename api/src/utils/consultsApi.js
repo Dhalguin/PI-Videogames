@@ -92,6 +92,15 @@ const getVideogameByName = async (name) => {
           [Op.iLike]: `%${name}%`,
         },
       },
+      include: [
+        {
+          model: Genres,
+          attributes: ["name"],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
     });
 
     let videogames = [].concat(responseDB).concat(response.data.results);
