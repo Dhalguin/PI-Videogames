@@ -31,6 +31,7 @@ router.get("/", async (req, res) => {
         name: videogame.name,
         background_image: videogame.background_image,
         genres: videogame.genres,
+        rating: videogame.rating,
       };
     });
 
