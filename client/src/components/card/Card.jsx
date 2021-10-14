@@ -12,15 +12,13 @@ function Card({ id, name, img, genres }) {
 
   return (
     <div className={styles.box}>
-      <img src={img} alt={name} />
-      <div className={styles.body}>
-        <p>
-          <Link to={`videogames/${id}`} className="link">
-            {name}
-          </Link>
-        </p>
-        <span>{genresName.join(", ")}</span>
-      </div>
+      <Link to={`videogames/${id}`} className="link">
+        <img src={img} alt={name} />
+        <div className={styles.body}>
+          <p>{name}</p>
+          <span>{genresName.join(", ")}</span>
+        </div>
+      </Link>
     </div>
   );
 }
