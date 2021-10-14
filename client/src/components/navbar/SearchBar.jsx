@@ -15,6 +15,8 @@ function SearchBar() {
     if (location !== baseRoute) history.push(baseRoute);
     if (title) dispatch(getVideogames(1, 15, title));
     else dispatch(getVideogames(1, 20));
+
+    setTitle("");
   };
 
   return (
