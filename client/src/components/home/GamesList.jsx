@@ -28,40 +28,40 @@ function GamesList({ videogames }) {
         <div>
           {videogames.length > 0 ? (
             <div className={styles.list}>
-              {genre === "All" && existence === "All"
-                ? videogames.map((videogame) => (
-                    <Card
-                      key={videogame.id}
-                      id={videogame.id}
-                      name={videogame.name}
-                      img={videogame.background_image}
-                      genres={videogame.genres}
-                    />
+              {genre === "All" && existence === "All" ? (
+                videogames.map((videogame) => (
+                  <Card key={videogame.id} data={videogame} />
+                ))
+              ) : genre !== "All" ? (
+                videogamesByGenre.length > 0 ? (
+                  videogamesByGenre.map((videogame) => (
+                    <Card key={videogame.id} data={videogame} />
                   ))
-                : genre !== "All" && existence === "All"
-                ? videogamesByGenre.map((videogame) => (
-                    <Card
-                      key={videogame.id}
-                      id={videogame.id}
-                      name={videogame.name}
-                      img={videogame.background_image}
-                      genres={videogame.genres}
-                    />
+                ) : (
+                  <div className={`center ${styles.box}`}>
+                    <span>THERE ARE NO VIDEOGAMES</span>
+                  </div>
+                )
+              ) : existence !== "All" ? (
+                videogamesByExistence.length > 0 ? (
+                  videogamesByExistence.map((videogame) => (
+                    <Card key={videogame.id} data={videogame} />
                   ))
-                : genre === "All" && existence !== "All"
-                ? videogamesByExistence.map((videogame) => (
-                    <Card
-                      key={videogame.id}
-                      id={videogame.id}
-                      name={videogame.name}
-                      img={videogame.background_image}
-                      genres={videogame.genres}
-                    />
-                  ))
-                : null}
+                ) : (
+                  <div className={`center ${styles.box}`}>
+                    <span>THERE ARE NO VIDEOGAMES</span>
+                  </div>
+                )
+              ) : (
+                <div className={`center ${styles.box}`}>
+                  <span>THERE ARE NO VIDEOGAMES</span>
+                </div>
+              )}
             </div>
           ) : (
-            <div>There are no videogames</div>
+            <div className={`center ${styles.box}`}>
+              <span>THERE ARE NO VIDEOGAMES</span>
+            </div>
           )}
         </div>
       )}
