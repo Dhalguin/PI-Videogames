@@ -5,7 +5,7 @@ function AddGameForm({
   videogame,
   handleOnChange,
   handleOnSubmit,
-  state,
+  genreState,
   setGenres,
 }) {
   const handleGenres = (e) => {
@@ -80,7 +80,7 @@ function AddGameForm({
           />
         </div>
         <div className={`form-group d-flex ${styles.genres}`}>
-          {state.genres.map((genre) => (
+          {genreState.map((genre) => (
             <div key={genre.id}>
               <label htmlFor={genre.id}>
                 <input

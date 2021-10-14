@@ -7,9 +7,9 @@ import Spinner from "../components/spinner/Spinner.jsx";
 import styles from "../assets/styles/add_box.module.css";
 
 function AddGamesPage() {
-  const history = useHistory();
   const dispatch = useDispatch();
-  const state = useSelector((state) => state.genres);
+  const history = useHistory();
+  const state = useSelector((state) => state);
   const [genres, setGenres] = React.useState([]);
   const [videogame, setVideogame] = React.useState({
     title: "",
@@ -20,8 +20,10 @@ function AddGamesPage() {
     background_image: "",
   });
 
+  const genreState = state.genres.genres;
+
   React.useEffect(() => {
-    if (!state.genres) dispatch(getGenres());
+    if (!genreState) dispatch(getGenres());
   }, []);
 
   const addVideogame = (data) => {
@@ -78,7 +80,7 @@ function AddGamesPage() {
         <AddGameForm
           styles={styles}
           videogame={videogame}
-          state={state}
+          genreState={genreState}
           setGenres={setGenres}
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
