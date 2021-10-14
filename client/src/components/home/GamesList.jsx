@@ -1,5 +1,10 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import {
+  filterByOrder,
+  filterByGenre,
+  filterByExistence,
+} from "../../utils/filters.js";
 import Card from "../card/Card.jsx";
 import styles from "../../assets/styles/list.module.css";
 
@@ -11,54 +16,10 @@ function GamesList({ videogames }) {
   var videogamesByGenre = [];
   var videogamesByExistence = [];
 
-  const filterByOrder = () => {
-    if (order === "rating") {
-      videogames = videogames.sort((a, b) => b.rating - a.rating);
-    } else if (order === "asc") {
-      videogames = videogames.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (order === "desc") {
-      videogames = videogames.sort((a, b) => b.name.localeCompare(a.name));
-    }
-  };
-
-  const filterByGenre = () => {
-    if (genre === "All") videogamesByGenre = [];
-
-    if (genre !== "All") {
-      for (let i = 0; i < videogames.length; i++) {
-        if (videogames[i].genres) {
-          for (let a = 0; a < videogames[i].genres.length; a++) {
-            if (videogames[i].genres[a].name === genre) {
-              videogamesByGenre.push(videogames[i]);
-            }
-          }
-        }
-      }
-    }
-  };
-
-  const filterByExistence = () => {
-    if (existence === "All") videogamesByExistence = [];
-
-    if (existence === "append") {
-      for (let i = 0; i < videogames.length; i++) {
-        if (!Number(videogames[i].id)) {
-          videogamesByExistence.push(videogames[i]);
-        }
-      }
-    } else if (existence === "exists") {
-      for (let i = 0; i < videogames.length; i++) {
-        if (Number(videogames[i].id)) {
-          videogamesByExistence.push(videogames[i]);
-        }
-      }
-    }
-  };
-
   if (videogames) {
-    filterByOrder();
-    filterByGenre();
-    filterByExistence();
+    filterByOrder(order, videogames);
+    filterByGenre(genre, videogames, videogamesByGenre);
+    filterByExistence(existence, videogames, videogamesByExistence);
   }
 
   return (
