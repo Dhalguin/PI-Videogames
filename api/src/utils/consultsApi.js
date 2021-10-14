@@ -21,25 +21,16 @@ const getAllVideogames = async (page, limit) => {
       ],
     });
 
-    let response = await axios.get(
-      `https://api.rawg.io/api/games?&key=${apiKey}`
-    );
+    let videogamesAPI = [];
+    let res = null;
 
-    let response2 = await axios.get(response.data.next);
+    for (let i = 0; i < 5; i++) {
+      if (i === 0)
+        res = await axios.get(`https://api.rawg.io/api/games?&key=${apiKey}`);
+      else res = await axios.get(res.data.next);
 
-    let response3 = await axios.get(response2.data.next);
-
-    let response4 = await axios.get(response3.data.next);
-
-    let response5 = await axios.get(response4.data.next);
-
-    let videogamesAPI = [].concat(
-      response.data.results,
-      response2.data.results,
-      response3.data.results,
-      response4.data.results,
-      response5.data.results
-    );
+      videogamesAPI = videogamesAPI.concat(res.data.results);
+    }
 
     let results = [].concat(videogamesDB).concat(videogamesAPI);
 
