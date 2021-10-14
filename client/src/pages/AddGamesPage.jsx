@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getGenres } from "../redux/actions/gamesAction.js";
+import { validate } from "../utils/validator.js";
+import { postVidegame } from "../utils/postVideogame.js";
 import AddGameForm from "../components/add/AddGameForm";
 import Spinner from "../components/spinner/Spinner.jsx";
 import styles from "../assets/styles/add_box.module.css";
@@ -11,6 +13,7 @@ function AddGamesPage() {
   const history = useHistory();
   const state = useSelector((state) => state);
   const [genres, setGenres] = React.useState([]);
+  const [errors, setErrors] = useState({});
   const [videogame, setVideogame] = React.useState({
     title: "",
     description: "",
@@ -26,44 +29,18 @@ function AddGamesPage() {
     if (!genreState) dispatch(getGenres());
   }, []);
 
-  const addVideogame = (data) => {
-    let videogame = {
-      name: data.title,
-      description: data.description,
-      released: data.released,
-      rating: data.rating,
-      genres,
-      platforms: data.platforms,
-      background_image: data.background_image,
-    };
-
-    fetch(`http://localhost:3001/videogames`, {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(videogame),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        alert(`The ${data.videogame.name} videogame added to DB successfully`);
-        history.push("/videogames");
-      })
-      .catch((err) => console.log(err));
-  };
-
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setErrors(validate({ ...videogame, [e.target.name]: e.target.value }));
+
     if (
       videogame.title &&
       videogame.description &&
       videogame.released &&
       videogame.rating &&
-      videogame.title &&
-      videogame.platforms &&
-      genres.length > 0
+      videogame.platforms
     ) {
-      addVideogame(videogame);
-    } else {
-      alert("Write in all textfiled");
+      postVidegame(videogame, genres, history);
     }
   };
 
@@ -76,7 +53,7 @@ function AddGamesPage() {
 
   return (
     <div className={`${styles.container} center`}>
-      {state.genres ? (
+      {genreState ? (
         <AddGameForm
           styles={styles}
           videogame={videogame}
@@ -84,6 +61,7 @@ function AddGamesPage() {
           setGenres={setGenres}
           handleOnChange={handleOnChange}
           handleOnSubmit={handleOnSubmit}
+          errors={errors}
         />
       ) : (
         <Spinner />

@@ -7,6 +7,7 @@ function AddGameForm({
   handleOnSubmit,
   genreState,
   setGenres,
+  errors,
 }) {
   const handleGenres = (e) => {
     let index = parseInt(e.target.value);
@@ -26,9 +27,11 @@ function AddGameForm({
             type="text"
             name="title"
             id="title"
+            className={errors.title && styles.boxError}
             value={videogame.title}
             onChange={handleOnChange}
           />
+          <p className={styles.textError}>{errors.title}</p>
         </div>
         <div className="form-group">
           <label htmlFor="img">Image URL</label>
@@ -45,9 +48,11 @@ function AddGameForm({
           <textarea
             name="description"
             id="description"
+            className={errors.description && styles.boxError}
             value={videogame.description}
             onChange={handleOnChange}
           ></textarea>
+          <p className={styles.textError}>{errors.description}</p>
         </div>
         <div className="form-group">
           <label htmlFor="released">Released</label>
@@ -55,9 +60,11 @@ function AddGameForm({
             type="date"
             name="released"
             id="released"
+            className={errors.released && styles.boxError}
             value={videogame.released}
             onChange={handleOnChange}
           />
+          <p className={styles.textError}>{errors.released}</p>
         </div>
         <div className="form-group">
           <label htmlFor="rating">Rating</label>
@@ -65,9 +72,11 @@ function AddGameForm({
             type="number"
             name="rating"
             id="rating"
+            className={errors.rating && styles.boxError}
             value={videogame.rating}
             onChange={handleOnChange}
           />
+          <p className={styles.textError}>{errors.rating}</p>
         </div>
         <div className="form-group">
           <label htmlFor="platforms">Platforms</label>
@@ -75,9 +84,11 @@ function AddGameForm({
             type="text"
             name="platforms"
             id="platforms"
+            className={errors.platforms && styles.boxError}
             value={videogame.platforms}
             onChange={handleOnChange}
           />
+          <p className={styles.textError}>{errors.platforms}</p>
         </div>
         <div className={`form-group d-flex ${styles.genres}`}>
           {genreState.map((genre) => (
